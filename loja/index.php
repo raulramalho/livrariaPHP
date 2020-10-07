@@ -28,7 +28,7 @@
 			include 'jumbotron.php';
 			echo '</br>';
 			include 'conexao.php'; 		
-			$consulta = $cn->query('select nm_livro,vl_preco,ds_capa from vw_livro;');
+			$consulta = $cn->query('select nm_livro,vl_preco,ds_capa,qt_estoque from vw_livro;');
 			$exibe = $consulta->fetch(PDO::FETCH_ASSOC);
 		 ?>
 	
@@ -42,14 +42,22 @@
 				<div class="text-center">
 				<button class="btn btn-lg btn-block btn-info">
 					<span class="glyphicon glyphicon-info-sign"> Detalhes</span>
-				</div>
 				
-
-				<div class="text-center" style="margin-top:5px; margin-bottom:5px;">
-				<button class="btn btn-lg btn-block btn-danger">
+				
+				<?php if($exibe['qt_estoque'] > 0 ){?>
+			
+	
+				<button class="btn btn-lg btn-block btn-info">
 					<span class="glyphicon glyphicon-usd"> Comprar</span>
-				</div>
+					
 				
+				<?php }else{?>
+					
+					
+				<button class="btn btn-lg btn-block btn-danger">
+					<span class="glyphicon glyphicon-usd"> Indisponivel</span>
+				<?php }?>
+				</div>
 				
 				</div>
 				<?php echo '<br/>';}?>				
@@ -58,5 +66,8 @@
 		
 		<?php include 'rodape.html';?>	
   </body> 
+<?php
 
+
+?>
 </html> 
